@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+</head>
+<body>
+    <h2>Edit Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>User Information</h3>
+        {{ user_form.as_p }}
+        <h3>Profile Information</h3>
+        {{ profile_form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'accounts:profile' %}">Cancel</a>
+</body>
+</html>
