@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soil Moisture Records</title>
+</head>
+<body>
+    <h2>Soil Moisture Records</h2>
+    <a href="/" class="btn btn-link mb-2">Back to Dashboard</a>
+    <a href="{% url 'add_soil_record' %}" class="btn btn-primary mb-2">Add New Record</a>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Location</th>
+            <th>Crop Type</th>
+            <th>Moisture (%)</th>
+            <th>Temperature (°C)</th>
+            <th>Humidity (%)</th>
+            <th>Recorded At</th>
+            <th>Notes</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.location }}</td>
+            <td>{{ record.crop_type }}</td>
+            <td>{{ record.moisture }}</td>
+            <td>{{ record.temperature }}</td>
+            <td>{{ record.humidity }}</td>
+            <td>{{ record.recorded_at }}</td>
+            <td>{{ record.notes }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7">No records found.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
