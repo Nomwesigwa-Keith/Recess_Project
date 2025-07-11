@@ -20,3 +20,16 @@ class SignUpForm(forms.ModelForm):
             profile.save()
         return user
 
+<<<<<<< HEAD
+=======
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['role']
+
+>>>>>>> c5de658ab53168b89c7a47579c76fb46f9eda6e6
