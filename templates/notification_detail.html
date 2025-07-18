@@ -1,0 +1,23 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Notification Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Irrigation Alert</h5>
+        </div>
+        <div class="card-body">
+            <p class="lead" style="font-size: 1.2rem; color: #333;">
+                {{ notification.message }}
+            </p>
+            <hr>
+            <div class="alert alert-primary" style="font-size: 1rem;">
+                <strong>Notes:</strong> <span style="font-style: italic; color: #007bff;">This recommendation is based on the latest soil moisture prediction and your set threshold. Please review your irrigation schedule accordingly.</span>
+            </div>
+            <a href="/accounts/admin/notifications/" class="btn btn-outline-primary mt-2">Back to Notifications</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

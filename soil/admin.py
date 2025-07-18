@@ -11,6 +11,6 @@ class CropTypeAdmin(admin.ModelAdmin):
 
 @admin.register(SoilMoistureRecord)
 class SoilMoistureRecordAdmin(admin.ModelAdmin):
-    list_display = ("location", "moisture", "recorded_at", "temperature", "humidity", "crop_type")
-    list_filter = ("location", "crop_type", "recorded_at")
-    search_fields = ("location__name", "notes")
+    list_display = ("location", "moisture", "recorded_at", "temperature", "humidity", "crop_type", "sensor_id", "sensor_type")
+    list_filter = ("location", "crop_type", "recorded_at", "sensor_type")
+    search_fields = ("location__name", "notes", "sensor_id")

@@ -1,0 +1,69 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}User Management{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">User Management</h2>
+
+{% if messages %}
+<div class="mb-4">
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+        role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}
+                {% if user.userprofile.password_reset_requested %}
+                <span class="badge bg-danger ms-1">Reset Requested</span>
+                {% endif %}
+            </td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.userprofile.role|default:'-' }}</td>
+            <td>
+                {% if user.userprofile.role == 'admin' %}
+                {% if user.userprofile.pending_approval %}
+                <span class="badge bg-warning text-dark">Pending</span>
+                {% else %}
+                <span class="badge bg-success">Approved</span>
+                {% endif %}
+                {% else %}
+                <span class="badge bg-secondary">Active</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if user.userprofile.role == 'admin' and user.userprofile.pending_approval %}
+                <form method="post" action="{% url 'approve_admin' user.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                </form>
+                {% endif %}
+                <a href="{% url 'admin_edit_user' user.id %}" class="btn btn-sm btn-primary ms-1">Edit</a>
+                <a href="{% url 'admin_reset_password' user.id %}" class="btn btn-sm btn-warning ms-1
+                    {% if user.userprofile.password_reset_requested %} border border-danger fw-bold {% endif %}">Reset
+                    Password</a>
+                <a href="{% url 'admin_delete_user' user.id %}"
+                    class="btn btn-sm btn-danger ms-1 {% if user.id == request.user.id %}disabled{% endif %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

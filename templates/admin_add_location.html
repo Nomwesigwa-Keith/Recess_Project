@@ -1,0 +1,24 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Add New Location{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Add New Location</h2>
+<form method="post" class="card p-4 shadow-sm" style="max-width: 500px;">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Name</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="id_latitude" class="form-label">Latitude</label>
+        {{ form.latitude }}
+    </div>
+    <div class="mb-3">
+        <label for="id_longitude" class="form-label">Longitude</label>
+        {{ form.longitude }}
+    </div>
+    <button type="submit" class="btn btn-success">Add Location</button>
+    <a href="{% url 'admin_location_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+{% endblock %}

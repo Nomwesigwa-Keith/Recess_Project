@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
     'accounts',
     'soil',
     'ml',
@@ -77,8 +79,12 @@ WSGI_APPLICATION = 'soil_moisture_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'soilmoistureapp',
+        'USER': 'umarmubiru',
+        'PASSWORD': '12345678',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -117,7 +123,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -125,3 +134,41 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# --- Security: Enforce HTTPS in production ---
+# Set these to True in production to enforce HTTPS
+# For development, set these to False
+SECURE_SSL_REDIRECT = False  # Redirect all HTTP to HTTPS (True in production)
+SESSION_COOKIE_SECURE = False  # Session cookies only sent over HTTPS (True in production)
+CSRF_COOKIE_SECURE = False  # CSRF cookies only sent over HTTPS (True in production)
+
+# --- Logging: Log errors and critical events to file ---
+import os
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django_errors.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'umarmubiru330@gmail.com'
+EMAIL_HOST_PASSWORD = 'kypr tygg yemd wujx'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'umarmubiru330@gmail.com'
+

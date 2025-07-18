@@ -1,0 +1,70 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Notification Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                {% if user.userprofile.role == 'farmer' %}
+                🌾 Irrigation Alert
+                {% elif user.userprofile.role == 'technician' %}
+                🔧 System Alert
+                {% else %}
+                📊 System Alert
+                {% endif %}
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="lead" style="font-size: 1.2rem; color: #333;">
+                {{ notification.message }}
+            </p>
+            <hr>
+            <div class="alert alert-info" style="font-size: 1rem;">
+                <strong>Notes:</strong>
+                <span style="font-style: italic; color: #007bff;">
+                    {% if user.userprofile.role == 'farmer' %}
+                    This recommendation is based on the latest soil moisture prediction and your set threshold. Please
+                    review your irrigation schedule accordingly.
+                    {% elif user.userprofile.role == 'technician' %}
+                    This system alert is based on the latest soil moisture data and ML predictions. Please review the
+                    system status and take appropriate action.
+                    {% else %}
+                    This recommendation is based on the latest soil moisture prediction and your set threshold. Please
+                    review your irrigation schedule accordingly.
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="d-flex gap-2">
+                {% if user.userprofile.role == 'farmer' %}
+                <a href="{% url 'farmer_notifications' %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Back to Notifications
+                </a>
+                {% elif user.userprofile.role == 'technician' %}
+                <a href="{% url 'technician_notifications' %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Back to Notifications
+                </a>
+                {% else %}
+                <a href="{% url 'admin_notifications' %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Back to Notifications
+                </a>
+                {% endif %}
+
+                <form action="{% url 'delete_notification_universal' notification.id %}" method="post"
+                    style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to delete this notification?');">
+                        <i class="bi bi-trash"></i> Delete Notification
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+{% endblock %}

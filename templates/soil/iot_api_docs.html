@@ -1,0 +1,422 @@
+{% extends 'base_dashboard.html' %}
+
+{% load static %}
+
+{% block main_content_style %}background-image: url('{% static "backgrounds/IOT.jpg" %}'); background-size: cover;
+background-position: center;{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h2 mb-1">🌱 IoT Device Integration</h1>
+                    <p class="text-muted mb-0">Connect your IoT sensors to our soil moisture monitoring system</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'soil_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Records
+                    </a>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">
+                        <i class="bi bi-house"></i> Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="bi bi-star"></i> Why IoT Integration?</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 text-center">
+                                    <div class="mb-3">
+                                        <i class="bi bi-clock text-primary" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h6>24/7 Monitoring</h6>
+                                    <p class="text-muted small">Continuous soil moisture tracking without manual
+                                        intervention</p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <div class="mb-3">
+                                        <i class="bi bi-graph-up text-success" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h6>Real-time Data</h6>
+                                    <p class="text-muted small">Instant updates and alerts for optimal crop management
+                                    </p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <div class="mb-3">
+                                        <i class="bi bi-water text-info" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h6>Smart Irrigation</h6>
+                                    <p class="text-muted small">Automated recommendations based on soil conditions</p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <div class="mb-3">
+                                        <i class="bi bi-currency-dollar text-warning" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h6>Cost Savings</h6>
+                                    <p class="text-muted small">Reduce water waste and improve crop yields</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start Card -->
+            <div class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-lightning"></i> Quick Start Guide</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-link-45deg"></i> API Base URL</h6>
+                            <div class="bg-light p-3 rounded">
+                                <code
+                                    class="text-primary">{{ request.scheme }}://{{ request.get_host }}/soil/api/</code>
+                            </div>
+                            <small class="text-muted">Use this URL to connect your IoT devices to our system</small>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-wifi"></i> Test Your Connection</h6>
+                            <button class="btn btn-sm btn-outline-success" onclick="testConnection()">
+                                <i class="bi bi-wifi"></i> Test API Status
+                            </button>
+                            <div id="connection-status" class="mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3 class="mb-3">🔄 How IoT Integration Works</h3>
+                </div>
+            </div>
+
+            <!-- Step 1: Device Setup -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-1-circle"></i> Step 1: Device Setup
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Configure Your IoT Device</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Assign a unique device ID to your
+                                    sensor</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Set the location where your sensor
+                                    is installed</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Configure the API endpoint URL</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Set up automatic data transmission
+                                    intervals</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="bi bi-cpu text-info" style="font-size: 3rem;"></i>
+                            <p class="text-muted mt-2">IoT Sensor Configuration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Data Collection -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-2-circle"></i> Step 2: Data Collection
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <i class="bi bi-database text-success" style="font-size: 3rem;"></i>
+                            <p class="text-muted mt-2">Automatic Data Collection</p>
+                        </div>
+                        <div class="col-md-8">
+                            <h6>Automatic Soil Monitoring</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Soil moisture levels are measured
+                                    continuously</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Temperature and humidity data is
+                                    collected</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Data is transmitted securely to our
+                                    servers</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Readings are automatically added to
+                                    soil records</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Data Processing -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-3-circle"></i> Step 3: Data Processing
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Smart Data Analysis</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Data is validated and stored in our
+                                    database</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Machine learning algorithms analyze
+                                    patterns</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Irrigation recommendations are
+                                    generated</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Alerts are sent for critical
+                                    conditions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="bi bi-graph-up text-warning" style="font-size: 3rem;"></i>
+                            <p class="text-muted mt-2">Smart Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Data -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="bi bi-geo-alt"></i> Available Locations</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Coordinates</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for location in locations %}
+                                        <tr>
+                                            <td><span class="badge bg-primary">{{ location.id }}</span></td>
+                                            <td><strong>{{ location.name }}</strong></td>
+                                            <td>
+                                                {% if location.latitude and location.longitude %}
+                                                <small class="text-muted">{{ location.latitude }}, {{ location.longitude
+                                                    }}</small>
+                                                {% else %}
+                                                <span class="text-muted">Not specified</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted">
+                                                <i class="bi bi-exclamation-triangle"></i> No locations available
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="bi bi-flower1"></i> Available Crop Types</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for crop in crop_types %}
+                                        <tr>
+                                            <td><span class="badge bg-success">{{ crop.id }}</span></td>
+                                            <td><strong>{{ crop.name }}</strong></td>
+                                            <td>
+                                                <small class="text-muted">{{ crop.description|default:"No description"
+                                                    }}</small>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted">
+                                                <i class="bi bi-exclamation-triangle"></i> No crop types available
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration Options -->
+            <div class="card mt-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="bi bi-gear"></i> Integration Options</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center mb-3">
+                                <i class="bi bi-phone text-primary" style="font-size: 2.5rem;"></i>
+                            </div>
+                            <h6 class="text-center">Mobile App</h6>
+                            <p class="text-muted text-center small">Use our mobile app to configure and monitor your IoT
+                                devices</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center mb-3">
+                                <i class="bi bi-laptop text-success" style="font-size: 2.5rem;"></i>
+                            </div>
+                            <h6 class="text-center">Web Dashboard</h6>
+                            <p class="text-muted text-center small">Access real-time data and analytics through our web
+                                interface</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center mb-3">
+                                <i class="bi bi-code-slash text-info" style="font-size: 2.5rem;"></i>
+                            </div>
+                            <h6 class="text-center">API Integration</h6>
+                            <p class="text-muted text-center small">Connect your existing systems using our REST API</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div class="card mt-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-headset"></i> Need Help?</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-download"></i> Download Test Script</h6>
+                            <p class="text-muted small">Test your IoT device integration with our provided script</p>
+                            <a href="/static/iot_test_example.py" class="btn btn-success" download>
+                                <i class="bi bi-download"></i> Download Test Script
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-envelope"></i> Contact Support</h6>
+                            <p class="text-muted small">Get help with IoT device setup and integration</p>
+                            <button class="btn btn-outline-primary" onclick="contactSupport()">
+                                <i class="bi bi-envelope"></i> Contact Support
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Integration -->
+            <div class="card mt-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="bi bi-play-circle"></i> Test Your Integration</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">Test if your IoT device can successfully submit readings to our system:</p>
+                    <button class="btn btn-warning" onclick="testSubmitReading()">
+                        <i class="bi bi-play-circle"></i> Test Submit Reading
+                    </button>
+                    <div id="submit-test-result" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+<!-- JavaScript for testing -->
+<script>
+    function testConnection() {
+        const statusDiv = document.getElementById('connection-status');
+        statusDiv.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> Testing...';
+
+        fetch('/soil/api/iot-status/')
+            .then(response => response.json())
+            .then(data => {
+                statusDiv.innerHTML = `<div class="alert alert-success py-2 mb-0">
+                <i class="bi bi-check-circle"></i> ${data.message}
+            </div>`;
+            })
+            .catch(error => {
+                statusDiv.innerHTML = `<div class="alert alert-danger py-2 mb-0">
+                <i class="bi bi-x-circle"></i> Connection failed: ${error.message}
+            </div>`;
+            });
+    }
+
+    function testSubmitReading() {
+        const resultDiv = document.getElementById('submit-test-result');
+        resultDiv.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> Testing...';
+
+        const testData = {
+            device_id: "test_device_001",
+            location_id: 1,
+            moisture: 45.5,
+            temperature: 25.3,
+            humidity: 60.2,
+            notes: "Test reading from documentation page"
+        };
+
+        fetch('/soil/api/iot-reading/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(testData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="alert alert-success py-2 mb-0">
+                <i class="bi bi-check-circle"></i> Test successful! Record ID: ${data.record_id}
+            </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="alert alert-danger py-2 mb-0">
+                <i class="bi bi-x-circle"></i> Test failed: ${data.error}
+            </div>`;
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = `<div class="alert alert-danger py-2 mb-0">
+            <i class="bi bi-x-circle"></i> Test failed: ${error.message}
+        </div>`;
+            });
+    }
+
+    function contactSupport() {
+        alert('Please contact our support team at support@soilmoisture.com for IoT device integration assistance.');
+    }
+</script>
+{% endblock %}

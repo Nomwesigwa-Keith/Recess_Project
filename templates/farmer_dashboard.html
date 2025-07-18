@@ -1,0 +1,57 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Farmer Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Farmer Dashboard</h2>
+{% include 'dashboard_soil_status.html' %}
+<div class="mb-3">
+    <strong>Your role(s):</strong>
+    {% if user_groups %}
+    {{ user_groups|join:', ' }}
+    {% else %}
+    <span class="text-danger">No role assigned</span>
+    {% endif %}
+</div>
+
+<!-- Recent Notifications Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-bell"></i> Recent Notifications</h5>
+            </div>
+            <div class="card-body">
+                {% if user.notifications.all|slice:":3" %}
+                <div class="list-group list-group-flush">
+                    {% for notification in user.notifications.all|slice:":3" %}
+                    <div class="list-group-item">
+                        <span class="fw-bold">{{ notification.created_at|date:"M d, Y H:i" }}</span> -
+                        {{ notification.message|linebreaksbr }}
+                        {% if not notification.is_read %}
+                        <span class="badge bg-warning text-dark ms-2">Unread</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info mb-0">No recent notifications.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Boxes Row -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">Soil Moisture Records</h5>
+                <p class="card-text">View and manage soil moisture data.</p>
+                <a href="/soil/" class="btn btn-success mt-auto">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #1976d2;
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            color: #1976d2;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        .summary {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .summary h3 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+
+        .summary-grid {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .summary-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .summary-item strong {
+            color: #1976d2;
+        }
+
+        .location-stats {
+            margin: 20px 0;
+        }
+
+        .location-stats h3 {
+            color: #1976d2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 11px;
+            text-align: left;
+        }
+
+        th {
+            background: #1976d2;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .period-info {
+            margin: 15px 0;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 3px;
+        }
+
+        .period-info strong {
+            color: #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>{{ report_title }}</h1>
+        <p>Generated on: {{ generated_at }}</p>
+        <p>Soil Moisture Monitoring System - {{ report_type }} Report</p>
+    </div>
+
+    <div class="period-info">
+        <strong>Report Period:</strong><br>
+        {{ start_date|date:"Y-m-d" }} to {{ end_date|date:"Y-m-d" }}
+    </div>
+
+    <div class="summary">
+        <h3>Overall Summary</h3>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <strong>Total Records:</strong><br>
+                {{ total_records }}
+            </div>
+            <div class="summary-item">
+                <strong>Average Moisture:</strong><br>
+                {{ avg_moisture }}%
+            </div>
+            <div class="summary-item">
+                <strong>Min Moisture:</strong><br>
+                {{ min_moisture }}%
+            </div>
+            <div class="summary-item">
+                <strong>Max Moisture:</strong><br>
+                {{ max_moisture }}%
+            </div>
+        </div>
+    </div>
+
+    {% if location_stats %}
+    <div class="location-stats">
+        <h3>Location-Specific Statistics</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Records</th>
+                    <th>Avg Moisture (%)</th>
+                    <th>Min Moisture (%)</th>
+                    <th>Max Moisture (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in location_stats %}
+                <tr>
+                    <td>{{ stat.location__name }}</td>
+                    <td>{{ stat.record_count }}</td>
+                    <td>{{ stat.avg_moisture|floatformat:2 }}</td>
+                    <td>{{ stat.min_moisture }}</td>
+                    <td>{{ stat.max_moisture }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <h3>Detailed Records</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Location</th>
+                <th>Crop Type</th>
+                <th>Soil Moisture (%)</th>
+                <th>Temperature (°C)</th>
+                <th>Humidity (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in records %}
+            <tr>
+                <td>{{ rec.recorded_at|date:"Y-m-d H:i" }}</td>
+                <td>{{ rec.location }}</td>
+                <td>{{ rec.crop_type|default:"-" }}</td>
+                <td>{{ rec.moisture }}</td>
+                <td>{{ rec.temperature }}</td>
+                <td>{{ rec.humidity }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; color: #666;">No records found for this period.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>This {{ report_type|lower }} report was automatically generated by the Soil Moisture Monitoring System.</p>
+        <p>For questions or support, please contact your system administrator.</p>
+    </div>
+</body>
+
+</html>

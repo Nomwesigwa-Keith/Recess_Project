@@ -1,0 +1,31 @@
+<div id="soil-moisture-status" class="alert alert-info mb-3">
+  Loading real-time soil moisture data...
+</div>
+<script>
+function fetchSoilMoisture() {
+  fetch('/soil/api/latest-soil-moisture/')
+    .then(response => response.json())
+    .then(data => {
+      let warning = '';
+      if (data.moisture !== null) {
+        if (data.moisture < 30) {
+          warning = '<span class="text-danger fw-bold">Low moisture risk!</span>';
+        } else if (data.moisture < 50) {
+          warning = '<span class="text-warning fw-bold">Moderate moisture</span>';
+        } else {
+          warning = '<span class="text-success fw-bold">Moisture OK</span>';
+        }
+        document.getElementById('soil-moisture-status').innerHTML =
+          `<b>Latest Soil Moisture:</b> ${data.moisture}% <br>` +
+          `<b>Location:</b> ${data.location || 'N/A'} <br>` +
+          `<b>Crop:</b> ${data.crop_type || 'N/A'} <br>` +
+          `<b>Recorded at:</b> ${data.recorded_at || 'N/A'} <br>` +
+          warning;
+      } else {
+        document.getElementById('soil-moisture-status').innerHTML = 'No soil moisture data available.';
+      }
+    });
+}
+fetchSoilMoisture();
+setInterval(fetchSoilMoisture, 5000);
+</script>

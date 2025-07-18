@@ -1,0 +1,165 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}ML Predictions{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px;">
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Soil Moisture Prediction</h4>
+        </div>
+        <div class="card-body">
+            <form id="ml-prediction-form">
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <select class="form-select" id="location" name="location" required>
+                        {% if locations and locations|length > 0 %}
+                        <option value="" disabled selected>Select a location</option>
+                        {% for loc in locations %}
+                        <option value="{{ loc }}">{{ loc }}</option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="" disabled selected>No locations available</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="crop_type" class="form-label">Crop Type</label>
+                    <select class="form-select" id="crop_type" name="crop_type" required>
+                        {% if crop_types and crop_types|length > 0 %}
+                        <option value="" disabled selected>Select a crop type</option>
+                        {% for crop in crop_types %}
+                        <option value="{{ crop.id }}">{{ crop.name }}</option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="" disabled selected>No crop types available</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="temperature" class="form-label">Temperature (°C)</label>
+                    <input type="number" step="0.1" class="form-control" id="temperature" name="temperature_celsius"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="humidity" class="form-label">Humidity (%)</label>
+                    <input type="number" step="0.1" class="form-control" id="humidity" name="humidity_percent" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Predict</button>
+            </form>
+            <div id="prediction-result" class="alert mt-4 d-none"></div>
+            <div class="mt-4">
+                <canvas id="prediction-graph" style="max-width:100%; display:none;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // CSRF helper function for AJAX
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    let predictionChart = null;
+    const SOIL_MOISTURE_THRESHOLD = 30.0; // Should match backend
+
+    document.getElementById('ml-prediction-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const location = document.getElementById('location').value;
+        const temperature = document.getElementById('temperature').value;
+        const humidity = document.getElementById('humidity').value;
+        const cropType = document.getElementById('crop_type').value;
+        const resultDiv = document.getElementById('prediction-result');
+        const graphCanvas = document.getElementById('prediction-graph');
+        resultDiv.classList.add('d-none');
+        resultDiv.classList.remove('alert-success', 'alert-danger');
+        graphCanvas.style.display = 'none';
+        try {
+            const response = await fetch('/ml/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    location: location,
+                    temperature_celsius: temperature,
+                    humidity_percent: humidity,
+                    crop_type: cropType
+                })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                let msg = `Predicted Soil Moisture: ${data.predicted_soil_moisture_percent.toFixed(2)}%`;
+                if (data.recommendation) {
+                    msg += `\n${data.recommendation}`;
+                }
+                resultDiv.textContent = msg;
+                resultDiv.classList.add('alert-success');
+                // Show graph
+                graphCanvas.style.display = 'block';
+                // Destroy previous chart if exists
+                if (predictionChart) {
+                    predictionChart.destroy();
+                }
+                predictionChart = new Chart(graphCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Prediction', 'Threshold'],
+                        datasets: [{
+                            label: 'Soil Moisture (%)',
+                            data: [data.predicted_soil_moisture_percent, SOIL_MOISTURE_THRESHOLD],
+                            backgroundColor: [
+                                data.predicted_soil_moisture_percent < SOIL_MOISTURE_THRESHOLD ? 'rgba(255, 99, 132, 0.7)' : 'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Soil Moisture Prediction vs. Threshold'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            } else {
+                resultDiv.textContent = data.error || 'Prediction failed.';
+                resultDiv.classList.add('alert-danger');
+            }
+        } catch (err) {
+            resultDiv.textContent = 'An error occurred. Please try again.';
+            resultDiv.classList.add('alert-danger');
+        }
+        resultDiv.classList.remove('d-none');
+    });
+</script>
+{% endblock %}
