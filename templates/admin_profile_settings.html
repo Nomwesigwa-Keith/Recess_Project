@@ -1,0 +1,23 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Profile & Settings{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Profile & Settings</h2>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <form method="post" class="card p-4 shadow-sm" style="max-width: 500px; padding: 20px; width: 100%;">
+        {% csrf_token %}
+        <div class="mb-3" style="margin: 10px;">
+            <label for="id_username" class="form-label">Username</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3" style="margin: 10px;">
+            <label for="id_email" class="form-label">Email</label>
+            {{ form.email }}
+        </div>
+        <button type="submit" class="btn btn-success" style="margin: 10px;">Save Changes</button>
+        <span style="display:inline-block; width: 16px;"></span>
+        <a href="{% url 'password_change' %}" class="btn btn-warning" style="margin: 10px;">Change Password</a>
+    </form>
+</div>
+{% endblock %}

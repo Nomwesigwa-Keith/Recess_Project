@@ -1,0 +1,301 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}ML Model Training{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h2 mb-1">🤖 ML Model Training</h1>
+                    <p class="text-muted mb-0">Train machine learning models with soil moisture data</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'soil_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Records
+                    </a>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+                    role="alert">
+                    {{ message|linebreaks }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Main Content -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="bi bi-cpu"></i> ML Model Training</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h5 class="mb-3"><i class="bi bi-gear"></i> Train Machine Learning Model</h5>
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="{{ ml_form.dataset_file.id_for_label }}"
+                                                        class="form-label fw-semibold">
+                                                        <i class="bi bi-database"></i> Training Dataset
+                                                    </label>
+                                                    <input type="file" name="dataset_file" class="form-control"
+                                                        accept=".csv" required>
+                                                    <div class="form-text">
+                                                        Upload a CSV file with training data for the ML model.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="{{ ml_form.model_name.id_for_label }}"
+                                                        class="form-label fw-semibold">
+                                                        <i class="bi bi-tag"></i> Model Name
+                                                    </label>
+                                                    <input type="text" name="model_name" class="form-control"
+                                                        value="soil_moisture_model" required>
+                                                    <div class="form-text">
+                                                        Name for the trained model file.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="{{ ml_form.test_size.id_for_label }}"
+                                                        class="form-label fw-semibold">
+                                                        <i class="bi bi-percent"></i> Test Size
+                                                    </label>
+                                                    <input type="number" name="test_size" class="form-control"
+                                                        value="0.2" min="0.1" max="0.5" step="0.1" required>
+                                                    <div class="form-text">
+                                                        Percentage of data for testing (0.1-0.5).
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="{{ ml_form.random_state.id_for_label }}"
+                                                        class="form-label fw-semibold">
+                                                        <i class="bi bi-shuffle"></i> Random State
+                                                    </label>
+                                                    <input type="number" name="random_state" class="form-control"
+                                                        value="42" min="0" max="1000" required>
+                                                    <div class="form-text">
+                                                        Random seed for reproducible results.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <div class="form-check mt-4">
+                                                        <input type="checkbox" name="retrain_existing"
+                                                            class="form-check-input" id="retrain_existing" checked>
+                                                        <label class="form-check-label" for="retrain_existing">
+                                                            <i class="bi bi-arrow-repeat"></i> Retrain Existing
+                                                            Model
+                                                        </label>
+                                                        <div class="form-text">
+                                                            Replace existing model with new one.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="bi bi-play-circle"></i> Train Model
+                                            </button>
+                                            <button type="button" class="btn btn-outline-info"
+                                                onclick="showDatasetInfo()">
+                                                <i class="bi bi-info-circle"></i> Dataset Info
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-light">
+                                        <div class="card-header">
+                                            <h6 class="mb-0"><i class="bi bi-lightbulb"></i> ML Training
+                                                Requirements</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="small mb-2">Your training dataset should contain:</p>
+                                            <ul class="list-unstyled small">
+                                                <li><i class="bi bi-check-circle text-success"></i>
+                                                    <strong>location</strong> - Location name
+                                                </li>
+                                                <li><i class="bi bi-check-circle text-success"></i>
+                                                    <strong>soil_moisture_percent</strong> - Target variable
+                                                </li>
+                                                <li><i class="bi bi-check-circle text-success"></i>
+                                                    <strong>temperature_celsius</strong> - Temperature in
+                                                    Celsius
+                                                </li>
+                                                <li><i class="bi bi-check-circle text-success"></i>
+                                                    <strong>humidity_percent</strong> - Humidity percentage
+                                                </li>
+                                            </ul>
+                                            <hr>
+                                            <p class="small mb-2"><strong>Optional columns:</strong></p>
+                                            <ul class="list-unstyled small">
+                                                <li><i class="bi bi-plus-circle text-info"></i>
+                                                    <strong>ph_level</strong> - Soil pH level
+                                                </li>
+                                                <li><i class="bi bi-plus-circle text-info"></i>
+                                                    <strong>rainfall_mm</strong> - Rainfall in millimeters
+                                                </li>
+                                                <li><i class="bi bi-plus-circle text-info"></i>
+                                                    <strong>irrigation_status</strong> - Irrigation on/off
+                                                </li>
+                                            </ul>
+                                            <hr>
+                                            <p class="small mb-0"><strong>Note:</strong> The model will be trained to
+                                                predict soil moisture levels based on environmental factors.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Training Results -->
+{% if training_metrics %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-check-circle"></i> Training Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="h3 text-success">{{ training_metrics.r2|floatformat:4 }}</div>
+                            <small class="text-muted">R² Score</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="h3 text-info">{{ training_metrics.rmse|floatformat:2 }}</div>
+                            <small class="text-muted">RMSE</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="h3 text-warning">{{ training_metrics.n_samples }}</div>
+                            <small class="text-muted">Total Samples</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="h3 text-primary">{{ training_metrics.model_name }}</div>
+                            <small class="text-muted">Model Name</small>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Dataset Information:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-arrow-right"></i> Training samples: {{ training_metrics.n_train }}</li>
+                            <li><i class="bi bi-arrow-right"></i> Test samples: {{ training_metrics.n_test }}</li>
+                            <li><i class="bi bi-arrow-right"></i> MSE: {{ training_metrics.mse|floatformat:2 }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Model Performance:</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" style="width: {{ training_metrics.r2_percentage }}%">
+                                {{ training_metrics.r2_percentage|floatformat:1 }}%
+                            </div>
+                        </div>
+                        <small class="text-muted">Accuracy Score</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Dataset Info Modal -->
+<div class="modal fade" id="datasetInfoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-info-circle"></i> Dataset Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Required Columns:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle text-success"></i> <strong>location</strong> - Location
+                                name</li>
+                            <li><i class="bi bi-check-circle text-success"></i> <strong>soil_moisture_percent</strong> -
+                                Target variable (0-100)</li>
+                            <li><i class="bi bi-check-circle text-success"></i> <strong>temperature_celsius</strong> -
+                                Temperature in Celsius</li>
+                            <li><i class="bi bi-check-circle text-success"></i> <strong>humidity_percent</strong> -
+                                Humidity percentage (0-100)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Optional Columns:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-plus-circle text-info"></i> <strong>ph_level</strong> - Soil pH (0-14)
+                            </li>
+                            <li><i class="bi bi-plus-circle text-info"></i> <strong>rainfall_mm</strong> - Rainfall in
+                                mm</li>
+                            <li><i class="bi bi-plus-circle text-info"></i> <strong>irrigation_status</strong> - 0/1 or
+                                True/False</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="alert alert-info">
+                    <h6><i class="bi bi-lightbulb"></i> Tips for Better Training:</h6>
+                    <ul class="mb-0">
+                        <li>Include diverse data from different locations and seasons</li>
+                        <li>Ensure data quality - remove outliers and missing values</li>
+                        <li>Use at least 1000 records for better model performance</li>
+                        <li>Balance your dataset across different moisture levels</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDatasetInfo() {
+        var modal = new bootstrap.Modal(document.getElementById('datasetInfoModal'));
+        modal.show();
+    }
+</script>
+{% endblock %}

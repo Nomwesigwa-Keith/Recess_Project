@@ -1,0 +1,322 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$WlppvzW8495ymyBviqjocN$2ZYVwRoWK92syLRn4Q2lBBIbYiINbx7Ji4kuaogVVPI=",
+            "last_login": "2025-07-12T23:09:14.853Z",
+            "is_superuser": false,
+            "username": "khotadet1",
+            "first_name": "",
+            "last_name": "",
+            "email": "khotadet@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-10T10:40:26.191Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$Ei18swwEAADuFPwEKZs18T$eCUpY7UClSxq5g9TatEPXJBhBkKvit04O3WJ4WcbZWM=",
+            "last_login": "2025-07-12T23:44:57.829Z",
+            "is_superuser": false,
+            "username": "lilian2",
+            "first_name": "",
+            "last_name": "",
+            "email": "nankundalilian5@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-10T11:27:46Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$EQSVRUycSZnKwMmLpW55PS$J2wMP/WzDk68a5FQgbBCV22lpYRl1hMwhVbAeSXERzI=",
+            "last_login": "2025-07-14T08:19:55.070Z",
+            "is_superuser": false,
+            "username": "legend5",
+            "first_name": "",
+            "last_name": "",
+            "email": "amajuong@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-10T12:20:37Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$ubHKBLkLBJlXnEeOkGNKRh$aOdGB0W/P57U544Nl2xo4JMGim6Z8E/mCPYoQEWBrdU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "khot5",
+            "first_name": "",
+            "last_name": "",
+            "email": "Khotadet@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-10T19:46:21.097Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$5SQRHj5xaPRy9PuDWDmeEe$Q+eqvoIBKiJkAdapETv0sbxur2eQHPcp4ot4pZi7+VU=",
+            "last_login": "2025-07-11T12:08:02Z",
+            "is_superuser": false,
+            "username": "junubin10",
+            "first_name": "",
+            "last_name": "",
+            "email": "kj@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-11T12:01:40Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 14,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$n40r7CmTzk0PmQiQg7w4NN$SXVozjBmC3Uz/GuG2Omzq1gj28M0HHPWqhTAQiIp7wY=",
+            "last_login": "2025-07-12T23:39:36.083Z",
+            "is_superuser": true,
+            "username": "umarmubiru",
+            "first_name": "",
+            "last_name": "",
+            "email": "umarmubiru330@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-12T23:39:07.298Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "soil.location",
+        "pk": 1,
+        "fields": {
+            "name": "masaka",
+            "latitude": 10.0,
+            "longitude": 10.0,
+            "created_by": null
+        }
+    },
+    {
+        "model": "soil.location",
+        "pk": 2,
+        "fields": {
+            "name": "Jinja",
+            "latitude": 19.3,
+            "longitude": 19.1,
+            "created_by": 14
+        }
+    },
+    {
+        "model": "soil.croptype",
+        "pk": 1,
+        "fields": {
+            "name": "coffee",
+            "description": "arabica",
+            "water_requirement": null,
+            "moisture_threshold": null,
+            "created_by": null
+        }
+    },
+    {
+        "model": "soil.croptype",
+        "pk": 2,
+        "fields": {
+            "name": "sugar canes",
+            "description": "sugar incentive",
+            "water_requirement": 30.1,
+            "moisture_threshold": 30.1,
+            "created_by": 14
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 1,
+        "fields": {
+            "location": 1,
+            "crop_type": 1,
+            "moisture": 45.5,
+            "recorded_at": "2025-07-10T03:03:49.188Z",
+            "temperature": 25.3,
+            "humidity": 60.2,
+            "notes": "Test data",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 2,
+        "fields": {
+            "location": 1,
+            "crop_type": null,
+            "moisture": 45.5,
+            "recorded_at": "2025-07-12T06:11:49.699Z",
+            "temperature": 25.3,
+            "humidity": 60.2,
+            "notes": "Test reading from documentation page",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 3,
+        "fields": {
+            "location": 2,
+            "crop_type": 2,
+            "moisture": 45.1,
+            "recorded_at": "2025-07-12T23:44:35.910Z",
+            "temperature": 32.6,
+            "humidity": 45.1,
+            "notes": "sugar inscentive",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 1,
+        "fields": {
+            "user": 6,
+            "role": "technician",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 2,
+        "fields": {
+            "user": 7,
+            "role": "farmer",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 6,
+        "fields": {
+            "user": 10,
+            "role": "admin",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 9,
+        "fields": {
+            "user": 11,
+            "role": "technician",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 10,
+        "fields": {
+            "user": 12,
+            "role": "admin",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 1,
+        "fields": {
+            "user": 12,
+            "message": "Irrigation needed! Predicted soil moisture (21.02%) is below the threshold (30.0%).",
+            "created_at": "2025-07-11T13:36:29.197Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 15,
+        "fields": {
+            "user": 11,
+            "message": "­ƒöº Test notification for technician: System update for khot5",
+            "created_at": "2025-07-12T08:16:21.617Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 16,
+        "fields": {
+            "user": 12,
+            "message": "­ƒôè Test notification for admin: Administrative alert for junubin10",
+            "created_at": "2025-07-12T08:16:21.640Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 18,
+        "fields": {
+            "user": 6,
+            "message": "­ƒöº System Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.795Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 19,
+        "fields": {
+            "user": 7,
+            "message": "­ƒî¥ No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.811Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 20,
+        "fields": {
+            "user": 10,
+            "message": "­ƒôè Admin Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.826Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 21,
+        "fields": {
+            "user": 11,
+            "message": "­ƒöº System Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.831Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 22,
+        "fields": {
+            "user": 12,
+            "message": "­ƒôè Admin Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.852Z",
+            "is_read": false
+        }
+    }
+]

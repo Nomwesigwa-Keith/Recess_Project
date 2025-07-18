@@ -1,0 +1,28 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Edit User: {{ user_obj.username }}</h2>
+<form method="post" class="card p-4 shadow-sm" style="max-width: 500px;">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_username" class="form-label">Username</label>
+        {{ form.username }}
+    </div>
+    <div class="mb-3">
+        <label for="id_email" class="form-label">Email</label>
+        {{ form.email }}
+    </div>
+    <div class="mb-3">
+        <label for="id_role" class="form-label">Role</label>
+        {{ form.role }}
+    </div>
+    <div class="mb-3">
+        <label for="id_is_active" class="form-label">Active</label>
+        {{ form.is_active }}
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="{% url 'admin_user_management' %}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,925 @@
+[
+    {
+        "model": "admin.logentry",
+        "pk": 17,
+        "fields": {
+            "action_time": "2025-07-12T23:41:28.550Z",
+            "user": 14,
+            "content_type": 7,
+            "object_id": "2",
+            "object_repr": "sugar canes",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 18,
+        "fields": {
+            "action_time": "2025-07-12T23:42:22.146Z",
+            "user": 14,
+            "content_type": 9,
+            "object_id": "2",
+            "object_repr": "Jinja",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 19,
+        "fields": {
+            "action_time": "2025-07-12T23:44:35.919Z",
+            "user": 14,
+            "content_type": 8,
+            "object_id": "3",
+            "object_repr": "Jinja - 45.1% at 2025-07-12 23:44",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 4,
+            "codename": "add_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 4,
+            "codename": "change_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 4,
+            "codename": "delete_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 4,
+            "codename": "view_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 5,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 5,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 5,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 5,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 6,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 6,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 6,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 6,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add crop type",
+            "content_type": 7,
+            "codename": "add_croptype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change crop type",
+            "content_type": 7,
+            "codename": "change_croptype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete crop type",
+            "content_type": 7,
+            "codename": "delete_croptype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view crop type",
+            "content_type": 7,
+            "codename": "view_croptype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add soil moisture record",
+            "content_type": 8,
+            "codename": "add_soilmoisturerecord"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change soil moisture record",
+            "content_type": 8,
+            "codename": "change_soilmoisturerecord"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete soil moisture record",
+            "content_type": 8,
+            "codename": "delete_soilmoisturerecord"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view soil moisture record",
+            "content_type": 8,
+            "codename": "view_soilmoisturerecord"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add location",
+            "content_type": 9,
+            "codename": "add_location"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change location",
+            "content_type": 9,
+            "codename": "change_location"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete location",
+            "content_type": 9,
+            "codename": "delete_location"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view location",
+            "content_type": 9,
+            "codename": "view_location"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 37,
+        "fields": {
+            "name": "Can add user profile",
+            "content_type": 10,
+            "codename": "add_userprofile"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 38,
+        "fields": {
+            "name": "Can change user profile",
+            "content_type": 10,
+            "codename": "change_userprofile"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 39,
+        "fields": {
+            "name": "Can delete user profile",
+            "content_type": 10,
+            "codename": "delete_userprofile"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 40,
+        "fields": {
+            "name": "Can view user profile",
+            "content_type": 10,
+            "codename": "view_userprofile"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 41,
+        "fields": {
+            "name": "Can add notification",
+            "content_type": 11,
+            "codename": "add_notification"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 42,
+        "fields": {
+            "name": "Can change notification",
+            "content_type": 11,
+            "codename": "change_notification"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 43,
+        "fields": {
+            "name": "Can delete notification",
+            "content_type": 11,
+            "codename": "delete_notification"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 44,
+        "fields": {
+            "name": "Can view notification",
+            "content_type": 11,
+            "codename": "view_notification"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$WlppvzW8495ymyBviqjocN$2ZYVwRoWK92syLRn4Q2lBBIbYiINbx7Ji4kuaogVVPI=",
+            "last_login": "2025-07-12T23:09:14.853Z",
+            "is_superuser": false,
+            "username": "khotadet1",
+            "first_name": "",
+            "last_name": "",
+            "email": "khotadet@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-10T10:40:26.191Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$Ei18swwEAADuFPwEKZs18T$eCUpY7UClSxq5g9TatEPXJBhBkKvit04O3WJ4WcbZWM=",
+            "last_login": "2025-07-12T23:44:57.829Z",
+            "is_superuser": false,
+            "username": "lilian2",
+            "first_name": "",
+            "last_name": "",
+            "email": "nankundalilian5@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-10T11:27:46Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$EQSVRUycSZnKwMmLpW55PS$J2wMP/WzDk68a5FQgbBCV22lpYRl1hMwhVbAeSXERzI=",
+            "last_login": "2025-07-14T08:19:55.070Z",
+            "is_superuser": false,
+            "username": "legend5",
+            "first_name": "",
+            "last_name": "",
+            "email": "amajuong@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-10T12:20:37Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$ubHKBLkLBJlXnEeOkGNKRh$aOdGB0W/P57U544Nl2xo4JMGim6Z8E/mCPYoQEWBrdU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "khot5",
+            "first_name": "",
+            "last_name": "",
+            "email": "Khotadet@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-10T19:46:21.097Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$5SQRHj5xaPRy9PuDWDmeEe$Q+eqvoIBKiJkAdapETv0sbxur2eQHPcp4ot4pZi7+VU=",
+            "last_login": "2025-07-11T12:08:02Z",
+            "is_superuser": false,
+            "username": "junubin10",
+            "first_name": "",
+            "last_name": "",
+            "email": "kj@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-11T12:01:40Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 14,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$n40r7CmTzk0PmQiQg7w4NN$SXVozjBmC3Uz/GuG2Omzq1gj28M0HHPWqhTAQiIp7wY=",
+            "last_login": "2025-07-12T23:39:36.083Z",
+            "is_superuser": true,
+            "username": "umarmubiru",
+            "first_name": "",
+            "last_name": "",
+            "email": "umarmubiru330@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-12T23:39:07.298Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "auth",
+            "model": "user"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "soil",
+            "model": "croptype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "soil",
+            "model": "soilmoisturerecord"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "soil",
+            "model": "location"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 10,
+        "fields": {
+            "app_label": "accounts",
+            "model": "userprofile"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 11,
+        "fields": {
+            "app_label": "accounts",
+            "model": "notification"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "2hiy09bd964ve0n8dxn62jlp1u3ro311",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-siwlfc5g2d41DiBHipMKcXdkKQW0b2beW4S4bzXsndcwk7gKEKffLcX85DYAPWK7LzIvbVvnJIciD9rltBC_bof7d1Bjr6P2Dk3xmqPOniyjM875YtNFESfHGhRqD6gMZMvFAlqCM3pEAkdkxecL1LE3Nw:1uaDbj:ET1wBXORINbbE4XyQioq9vnPd_zuoEOjxV3x12O63f0",
+            "expire_date": "2025-07-25T13:16:07.638Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "8ipk5ms34aox195p4ewbrwpj0mg18rdx",
+        "fields": {
+            "session_data": ".eJxVjMsOwiAURP-FtSFQ3i7d9xvI5QJSNZCUdmX8d2nShWZ2c87Mm3jYt-L3nla_RHIlmlx-uwD4TPUA8QH13ii2uq1LoIdCT9rp3GJ63U7376BAL2MdkjZsEswZx63EyKJUI8Ipy7NGJTgKm7NRPABolx2gNTjkjJNAKcnnC7ycNy0:1uZomP:X8EMGn13U2eHIQXAdMKN5VLfxorzBXHNjNSz3UCMYl8",
+            "expire_date": "2025-07-24T10:45:29.087Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "cxw4m6ftvykjoaqo3m4wzmz55nebrxrv",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hCmQAsu3XsGMjCDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwkzgLUOL0O0ZMD647oTvWW5Op1XWZo9wVedAur434eTncv4OCvXzrCZS24IyyKRmdssOJ2GibB_YeRshAzATkRu3QRswp2hyVGbRz6HUW7w_5Ozg1:1uZqLw:voye7y6DNuJF2Zzs7INMgXUfsLYEo82byu6GB--5-Tk",
+            "expire_date": "2025-07-24T12:26:16.368Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "d3q5z9fssa00fe0za4b4o5k15omm0ldh",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hCmQAsu3XsGMjCDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwkzgLUOL0O0ZMD647oTvWW5Op1XWZo9wVedAur434eTncv4OCvXzrCZS24IyyKRmdssOJ2GibB_YeRshAzATkRu3QRswp2hyVGbRz6HUW7w_5Ozg1:1uZqlv:09C0-64_dq4CF_OGGOfJ6VvJAve4wtk-bRQoQJSRDhg",
+            "expire_date": "2025-07-24T12:53:07.474Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "i4kouokwvk0nzj9ovgrt5rrstygc4jay",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-siwlfc5g2d41DiBHipMKcXdkKQW0b2beW4S4bzXsndcwk7gKEKffLcX85DYAPWK7LzIvbVvnJIciD9rltBC_bof7d1Bjr6P2Dk3xmqPOniyjM875YtNFESfHGhRqD6gMZMvFAlqCM3pEAkdkxecL1LE3Nw:1uajtp:xEJNd1UosseLmfPZEINQ-e9fElvOLUfpgFEpVebSZFI",
+            "expire_date": "2025-07-26T23:44:57.844Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "kwwf27zprtg7rwvbn0ojtmsdpr5x00pj",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlmON_EGSvqcIdpfSADZUj4V4u4QKQW0b2bey_W0rWO_LTb3k7qLa9zpd2OSh-Ud6J3yrXgpeZ0n9rviD7r4rqg9r4f7dzDSMn7rKLXBGQhrJQwVt1Ahx8aQKDQBWZJCgIFRRQeTOrUyBASNxsxgyb0_6yU4sA:1uZhDC:TwWGXgNAWk9rnFvvVNUmuPNWTcOojSu5nc9AFeBDaeQ",
+            "expire_date": "2025-07-24T02:40:38.276Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "plmxoaao0ptc79avflxg3ndre7h7jyxm",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hCmQAsu3XsGMjCDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwkzgLUOL0O0ZMD647oTvWW5Op1XWZo9wVedAur434eTncv4OCvXzrCZS24IyyKRmdssOJ2GibB_YeRshAzATkRu3QRswp2hyVGbRz6HUW7w_5Ozg1:1ubEPj:NPhBFFDXT7QtkvXCIqtC0KsCgrWjyQr623bO8Gr3Eb4",
+            "expire_date": "2025-07-28T08:19:55.131Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "ryzpux2bqwcscuq8lb68bye0xpii8fhv",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hA6wAAu3XsGMjBUqoYmpV0Z765NutDtf-_9l4i0rTVuvSxxYnEWRpx-t0T5UdoO-E7tNss8t3WZktwVedAurzOX5-Vw_w4q9fqtAyL7YsA4BcqbAmSZtBuJ2GcMA9mBtEoFMTjKHrNNgVEzM8DoNYj3B9kHN9s:1uYqpy:Md5cI1a7tS4PSAQFAC1uuPDMI9VM-loMnyKUPvSk0fQ",
+            "expire_date": "2025-07-21T18:45:10.545Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "wnrhvtv6a7q80j7ixcta1kfyuyq6l7ya",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-siwlfc5g2d41DiBHipMKcXdkKQW0b2beW4S4bzXsndcwk7gKEKffLcX85DYAPWK7LzIvbVvnJIciD9rltBC_bof7d1Bjr6P2Dk3xmqPOniyjM875YtNFESfHGhRqD6gMZMvFAlqCM3pEAkdkxecL1LE3Nw:1uaWAG:SaIRlAeR1q9zPyRzeY_eqDWHjwK05DCXoAl1YI1eldw",
+            "expire_date": "2025-07-26T09:05:00.368Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "ykv1wqra6rgh6sxbhjwoanck0m8qhhh3",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hCmQAsu3XsGMjCDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwkzgLUOL0O0ZMD647oTvWW5Op1XWZo9wVedAur434eTncv4OCvXzrCZS24IyyKRmdssOJ2GibB_YeRshAzATkRu3QRswp2hyVGbRz6HUW7w_5Ozg1:1uaFO8:NSxKfpsUvtRjMxr7q6tiPuZDP5Nv6pFdPqxZFx0J-L0",
+            "expire_date": "2025-07-25T15:10:12.105Z"
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 1,
+        "fields": {
+            "user": 6,
+            "role": "technician",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 2,
+        "fields": {
+            "user": 7,
+            "role": "farmer",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 6,
+        "fields": {
+            "user": 10,
+            "role": "admin",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 9,
+        "fields": {
+            "user": 11,
+            "role": "technician",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.userprofile",
+        "pk": 10,
+        "fields": {
+            "user": 12,
+            "role": "admin",
+            "pending_approval": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 1,
+        "fields": {
+            "user": 12,
+            "message": "Irrigation needed! Predicted soil moisture (21.02%) is below the threshold (30.0%).",
+            "created_at": "2025-07-11T13:36:29.197Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 15,
+        "fields": {
+            "user": 11,
+            "message": "­ƒöº Test notification for technician: System update for khot5",
+            "created_at": "2025-07-12T08:16:21.617Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 16,
+        "fields": {
+            "user": 12,
+            "message": "­ƒôè Test notification for admin: Administrative alert for junubin10",
+            "created_at": "2025-07-12T08:16:21.640Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 18,
+        "fields": {
+            "user": 6,
+            "message": "­ƒöº System Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.795Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 19,
+        "fields": {
+            "user": 7,
+            "message": "­ƒî¥ No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.811Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 20,
+        "fields": {
+            "user": 10,
+            "message": "­ƒôè Admin Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.826Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 21,
+        "fields": {
+            "user": 11,
+            "message": "­ƒöº System Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.831Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "accounts.notification",
+        "pk": 22,
+        "fields": {
+            "user": 12,
+            "message": "­ƒôè Admin Alert: No irrigation needed. Predicted soil moisture (38.12%) is above the threshold (30.0%). Location: Farm C",
+            "created_at": "2025-07-12T23:10:10.852Z",
+            "is_read": false
+        }
+    },
+    {
+        "model": "soil.location",
+        "pk": 1,
+        "fields": {
+            "name": "masaka",
+            "latitude": 10.0,
+            "longitude": 10.0,
+            "created_by": null
+        }
+    },
+    {
+        "model": "soil.location",
+        "pk": 2,
+        "fields": {
+            "name": "Jinja",
+            "latitude": 19.3,
+            "longitude": 19.1,
+            "created_by": 14
+        }
+    },
+    {
+        "model": "soil.croptype",
+        "pk": 1,
+        "fields": {
+            "name": "coffee",
+            "description": "arabica",
+            "water_requirement": null,
+            "moisture_threshold": null,
+            "created_by": null
+        }
+    },
+    {
+        "model": "soil.croptype",
+        "pk": 2,
+        "fields": {
+            "name": "sugar canes",
+            "description": "sugar incentive",
+            "water_requirement": 30.1,
+            "moisture_threshold": 30.1,
+            "created_by": 14
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 1,
+        "fields": {
+            "location": 1,
+            "crop_type": 1,
+            "moisture": 45.5,
+            "recorded_at": "2025-07-10T03:03:49.188Z",
+            "temperature": 25.3,
+            "humidity": 60.2,
+            "notes": "Test data",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 2,
+        "fields": {
+            "location": 1,
+            "crop_type": null,
+            "moisture": 45.5,
+            "recorded_at": "2025-07-12T06:11:49.699Z",
+            "temperature": 25.3,
+            "humidity": 60.2,
+            "notes": "Test reading from documentation page",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    },
+    {
+        "model": "soil.soilmoisturerecord",
+        "pk": 3,
+        "fields": {
+            "location": 2,
+            "crop_type": 2,
+            "moisture": 45.1,
+            "recorded_at": "2025-07-12T23:44:35.910Z",
+            "temperature": 32.6,
+            "humidity": 45.1,
+            "notes": "sugar inscentive",
+            "sensor_id": null,
+            "sensor_type": null
+        }
+    }
+]

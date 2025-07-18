@@ -1,0 +1,249 @@
+{% extends 'base_dashboard.html' %}
+
+{% load static %}
+
+{% block title %}Reports & Analytics{% endblock %}
+
+{% block main_content_style %}background-image: url('{% static "backgrounds/REPORTS ANALYTICS.avif" %}');
+background-size: cover; background-position: center;{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px;">
+    <div class="card shadow-sm mt-4 mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Soil Moisture Analytics</h4>
+        </div>
+        <div class="card-body">
+            <form class="row g-3 mb-4" method="get" id="analytics-filter-form">
+                <div class="col-md-3">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date"
+                        value="{{ request.GET.start_date }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date"
+                        value="{{ request.GET.end_date }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="location" class="form-label">Location</label>
+                    <select class="form-select" id="location" name="location">
+                        <option value="">All</option>
+                        {% for loc in all_locations %}
+                        <option value="{{ loc.id }}" {% if request.GET.location == loc.id|stringformat:'s' %}selected{% endif %}>{{ loc.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="crop_type" class="form-label">Crop Type</label>
+                    <select class="form-select" id="crop_type" name="crop_type">
+                        <option value="">All</option>
+                        {% for crop in all_crop_types %}
+                        <option value="{{ crop.id }}" {% if request.GET.crop_type == crop.id|stringformat:'s' %}selected{% endif %}>{{ crop.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12 d-flex justify-content-end align-items-end gap-2">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <button type="button" class="btn btn-outline-success" onclick="exportAnalytics('csv')">Export
+                        CSV</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="exportAnalytics('pdf')">Export
+                        PDF</button>
+                </div>
+            </form>
+
+            <!-- Periodic Reports Section -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Periodic Reports</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-3">Generate automated reports for different time periods:</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="{% url 'daily_report' %}" class="btn btn-outline-primary w-100 mb-2">
+                                        <i class="fas fa-calendar-day"></i> Daily Report
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{% url 'weekly_report' %}" class="btn btn-outline-success w-100 mb-2">
+                                        <i class="fas fa-calendar-week"></i> Weekly Report
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{% url 'monthly_report' %}" class="btn btn-outline-warning w-100 mb-2">
+                                        <i class="fas fa-calendar-alt"></i> Monthly Report
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prediction History Section -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-warning">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">ML Prediction History</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-3">Export your historical ML prediction records:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{% url 'export_prediction_history' %}" class="btn btn-outline-info w-100">
+                                        <i class="fas fa-download"></i> Export Prediction History (CSV)
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'export_prediction_history' %}?start_date={{ request.GET.start_date|default:'' }}&end_date={{ request.GET.end_date|default:'' }}"
+                                        class="btn btn-outline-secondary w-100">
+                                        <i class="fas fa-filter"></i> Export with Current Filters
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <canvas id="moistureByLocationChart" height="100"></canvas>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <canvas id="moistureTrendChart" height="80"></canvas>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <canvas id="minMaxByLocationChart" height="80"></canvas>
+                </div>
+            </div>
+            <h5>Recent Soil Moisture Records</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Location</th>
+                            <th>Soil Moisture (%)</th>
+                            <th>Temperature (°C)</th>
+                            <th>Humidity (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rec in recent_records %}
+                        <tr>
+                            <td>{{ rec.recorded_at }}</td>
+                            <td>{{ rec.location }}</td>
+                            <td>{{ rec.moisture }}</td>
+                            <td>{{ rec.temperature }}</td>
+                            <td>{{ rec.humidity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function exportAnalytics(format) {
+        const form = document.getElementById('analytics-filter-form');
+        const params = new URLSearchParams(new FormData(form)).toString();
+        let url = `/reports/analytics/export/${format}/?` + params;
+        window.open(url, '_blank');
+    }
+    // Bar chart: Avg soil moisture by location
+    const ctx = document.getElementById('moistureByLocationChart').getContext('2d');
+    const chartData = {
+        labels: {{ locations| safe }},
+    datasets: [{
+        label: 'Avg Soil Moisture (%)',
+        data: {{ avg_moisture| safe }},
+        backgroundColor: 'rgba(33, 150, 243, 0.6)',
+        borderColor: 'rgba(33, 150, 243, 1)',
+        borderWidth: 1
+        }]
+    };
+    new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Average Soil Moisture by Location' }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 100 }
+            }
+        }
+    });
+    // Line chart: Soil moisture trend over time
+    const trendCtx = document.getElementById('moistureTrendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels: {{ trend_dates| safe }},
+        datasets: [{
+            label: 'Avg Soil Moisture (%)',
+            data: {{ trend_moisture| safe }},
+        fill: false,
+        borderColor: 'rgba(76, 175, 80, 1)',
+        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+        tension: 0.1
+            }]
+        },
+        options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: 'Soil Moisture Trend Over Time' }
+        },
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+    });
+    // Bar chart: Min/Max soil moisture by location
+    const minMaxCtx = document.getElementById('minMaxByLocationChart').getContext('2d');
+    new Chart(minMaxCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ minmax_locations| safe }},
+        datasets: [
+        {
+            label: 'Min Moisture',
+            data: {{ min_moisture| safe }},
+        backgroundColor: 'rgba(255, 193, 7, 0.6)',
+        borderColor: 'rgba(255, 193, 7, 1)',
+        borderWidth: 1
+                },
+        {
+            label: 'Max Moisture',
+            data: {{ max_moisture| safe }},
+        backgroundColor: 'rgba(244, 67, 54, 0.6)',
+        borderColor: 'rgba(244, 67, 54, 1)',
+        borderWidth: 1
+                }
+    ]
+        },
+        options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: 'Min/Max Soil Moisture by Location' }
+        },
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+    });
+</script>
+{% endblock %}

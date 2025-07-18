@@ -1,0 +1,15 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Confirm Delete Location{% endblock %}
+
+{% block content %}
+<div class="card p-4 shadow-sm" style="max-width: 500px;">
+    <h3 class="mb-3 text-danger">Confirm Delete</h3>
+    <p>Are you sure you want to delete location <strong>{{ location.name }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'admin_location_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

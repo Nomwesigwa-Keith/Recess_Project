@@ -1,0 +1,22 @@
+location,crop_type,moisture,temperature,humidity,notes
+Farm A,Corn,45.5,25.3,60.2,Morning reading
+Farm A,Corn,42.1,26.8,58.9,Afternoon reading
+Farm A,Corn,38.7,28.2,55.4,Evening reading
+Farm B,Wheat,48.9,24.7,65.3,Morning reading
+Farm B,Wheat,46.2,25.1,63.1,Afternoon reading
+Farm B,Wheat,43.8,26.3,60.7,Evening reading
+Farm C,Soybeans,52.3,23.5,70.1,Morning reading
+Farm C,Soybeans,49.8,24.2,68.4,Afternoon reading
+Farm C,Soybeans,47.2,25.6,65.9,Evening reading
+Greenhouse 1,Tomatoes,55.7,22.8,75.3,Morning reading
+Greenhouse 1,Tomatoes,53.2,23.4,73.1,Afternoon reading
+Greenhouse 1,Tomatoes,50.8,24.7,70.8,Evening reading
+Field 1,Potatoes,38.4,27.3,54.2,Morning reading
+Field 1,Potatoes,35.9,28.7,51.8,Afternoon reading
+Field 1,Potatoes,33.2,29.8,49.1,Evening reading
+Orchard A,Apples,41.6,26.1,59.8,Morning reading
+Orchard A,Apples,39.2,27.4,57.3,Afternoon reading
+Orchard A,Apples,36.8,28.9,54.9,Evening reading
+Vineyard 1,Grapes,44.7,25.8,61.5,Morning reading
+Vineyard 1,Grapes,42.3,26.5,59.2,Afternoon reading
+Vineyard 1,Grapes,39.9,27.8,56.8,Evening reading 

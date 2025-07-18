@@ -1,0 +1,20 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Edit Crop Type{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Edit Crop Type: {{ crop_type.name }}</h2>
+<form method="post" class="card p-4 shadow-sm" style="max-width: 500px;">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Name</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="id_description" class="form-label">Description</label>
+        {{ form.description }}
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="{% url 'admin_crop_type_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+{% endblock %}
